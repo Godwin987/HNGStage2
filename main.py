@@ -38,7 +38,7 @@ with app.app_context():
         person = session.get(Persons, user_id)
         if not person:
             return jsonify(error={"Not Found": "Sorry, we don't have such a person in the database."})
-        return jsonify(name=person.name)
+        return jsonify(name=person.name, id=person.id)
 
     # UPDATE A PERSON
     @app.route('/api/<user_id>', methods=['PATCH'])
