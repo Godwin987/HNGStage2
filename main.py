@@ -43,9 +43,10 @@ with app.app_context():
     # UPDATE A PERSON
     @app.route('/api/<user_id>', methods=['PATCH'])
     def patch(user_id):
-        if session.get(Persons, user_id):
-            person = session.get(Persons, user_id)
-            person.name = request.args.get("name")
+        person = session.get(Persons, user_id)
+        if person:
+            person.name = request.form.get("name")
+            person.id = user_id
             db.session.commit()
             # 200 OK
             return jsonify(success="Successfully updated the person record"), 200
